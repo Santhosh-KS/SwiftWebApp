@@ -5,7 +5,21 @@ import KituraStencil
 
 HeliumLogger.use(.info)
 let router = Router()
-//router.setDefault(templateEngine: StencilTemplateEngine())
+
+router.setDefault(templateEngine: StencilTemplateEngine())
+
+router.get("/") {
+    request, response, next in
+    defer { next()}
+    try response.render("home", context: [:])
+}
+
+router.get("/contact") {
+    request, response, next in
+    defer { next()}
+    try response.render("contact", context: [:])
+}
+/*
 router.get("/") {
     request, response, next in
     try response.send("Hello Santhosh").end()
@@ -20,7 +34,7 @@ router.get("/contact") {
     request, response, next in
     try response.send("Hello Santhosh").end()
 }
-
+*/
 Kitura.addHTTPServer(onPort: 8090, with: router)
 Log.info("Haters gonna hate!")
 Kitura.run()
